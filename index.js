@@ -2,62 +2,60 @@
    Complete the below for code reviewers' convenience:
 
    Code repository: _put repo URL here_
-   Web app: _put project's github pages URL here_
+      Web app: https://samval007.github.io/a-tiny-JS-world/
    */
 
 // ======== OBJECTS DEFINITIONS ========
 // Define your objects here
 class Person {
-   constructor(species, gender, name, speach, legs) {
-     this.species = species;
-     this.name = name;
-     this.gender = gender;
-     this.speach = speach;
-     this.legs = legs;
-   }
+  constructor(species, name, gender, speech, legs) {
+    this.species = species;
+    this.name = name;
+    this.gender = gender;
+    this.speech = speech;
+    this.legs = legs;
+  }
 
-   saySpeach() {
-     const sayingSpeach = [
-       this.speach,
-       `I am a ${this.species}.`,
-       `My name is ${this.name}.`,
-       `My gender is ${this.gender}.`,
-       `I have ${this.legs} legs.`
-     ];
-     return sayingSpeach.join(' ');
-   }
+  say() {
+    const say = [
+      this.speech,
+      `I am a ${this.species}.`,
+      `My name is ${this.name}.`,
+      `My gender is ${this.gender}.`,
+      `I have ${this.legs} legs.`
+    ];
+    return say.join(' ');
+  }
 
- }
+}
 
- class Dog extends Person {
-   constructor(name, gender, speach, legs = 4) {
-     super("dog", name, gender, speach, legs);
-   }
- }
- class Cat extends Person {
-   constructor(name, gender, speach, legs = 4) {
-     super("cat", name, gender, speach, legs);
-   }
- }
- class Human extends Person {
-   constructor(name, gender, speach, friends, legs = 2, hands = 2) {
-     super("human", name, gender, speach, friends, legs, hands);
-     this.legs = legs;
-     this.hands = hands;
+class Dog extends Person {
+  constructor(name, gender, speech) {
+    super("dog", name, gender, speech, 4);
+  }
+}
+class Cat extends Person {
+  constructor(name, gender, speech) {
+    super("cat", name, gender, speech, 4);
+  }
+}
+class Human extends Person {
+  constructor(name, gender, speech, friends) {
+    super("human", name, gender, speech, 2); // '2' - here it's numb of legs
+    this.hands = 2;
+    this.friends = friends;
+  }
+  say() {
+    return `${super.say()} I have ${this.hands} hands.`
+  }
+}
+const dog = new Dog("Sharik", "male", "Wow-Wow!");
+const cat = new Cat("Umka", "female", "Meow!");
+const man = new Human("Valerii", "male", "Bongiorno!");
+const woman = new Human("Liza", "female", "Tere hommikust!");
 
-   }
+// ======== OUTPUT ========
 
-   saySpeach() {
-     return `${super.saySpeach()} I hvae ${this.hands} hands.`
-   }
- }
- const dog = new Dog("male", "Sharik", "Wow-Wow!");
- const cat = new Cat("female", "Umka", "Meow!");
- const man = new Human("male", "Valerii", "Bongiorno!");
- const woman = new Human("female", "Liza", "Tere hommikust!");
+const persons = [man, woman, dog, cat];
 
- // ======== OUTPUT ========
-
- const persons = [man, woman, dog, cat];
-
- persons.forEach((person) => print(person.saySpeach()));
+persons.forEach((person) => print(person.say()));
