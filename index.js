@@ -6,71 +6,58 @@
    */
 
 // ======== OBJECTS DEFINITIONS ========
-const woman = {
-   species: 'human',
-   gender: 'female',
-   name: 'Liza',
-   hands: 2,
-   legs: 2,
-   speach: 'Tere hommikust!'
-};
-const man = {
-   species: 'human',
-   gender: 'male',
-   name: 'Valerii',
-   hands: 2,
-   legs: 2,
-   speach: 'Bongiorno!'
-};
-const cat = {
-   species: 'cat',
-   gender: 'female',
-   name: 'Umka',
-   hands: 0,
-   legs: 4,
-   speach: 'Meow!'
-};
-const dog = {
-   species: 'dog',
-   gender: 'male',
-   name: 'Sharik',
-   hands: 0,
-   legs: 4,
-   speach: 'Wow-Wow!'
-};
-const catWoman = {
-   species: 'cat-woman',
-   gender: 'female',
-   name: 'Chalotra',
-   hands: 2,
-   legs: 2,
-   speach: cat.speach + ' ' + woman.speach,
-};
+// Define your objects here
+class Person {
+   constructor(species, gender, name, speach, legs) {
+     this.species = species;
+     this.name = name;
+     this.gender = gender;
+     this.speach = speach;
+     this.legs = legs;
+   }
 
-woman.friends = [man, cat, dog];
-man.friends = [catWoman, woman, dog];
-dog.friends = [man, woman];
-cat.friends = [woman, catWoman];
-catWoman.friends = [man, cat];
+   saySpeach() {
+     const sayingSpeach = [
+       this.speach,
+       `I am a ${this.species}.`,
+       `My name is ${this.name}.`,
+       `My gender is ${this.gender}.`,
+       `I have ${this.legs} legs.`
+     ];
+     return sayingSpeach.join(' ');
+   }
 
+ }
 
+ class Dog extends Person {
+   constructor(name, gender, speach, legs = 4) {
+     super("dog", name, gender, speach, legs);
+   }
+ }
+ class Cat extends Person {
+   constructor(name, gender, speach, legs = 4) {
+     super("cat", name, gender, speach, legs);
+   }
+ }
+ class Human extends Person {
+   constructor(name, gender, speach, friends, legs = 2, hands = 2) {
+     super("human", name, gender, speach, friends, legs, hands);
+     this.legs = legs;
+     this.hands = hands;
 
+   }
 
-// ======== OUTPUT ========
+   saySpeach() {
+     return `${super.saySpeach()} I hvae ${this.hands} hands.`
+   }
+ }
+ const dog = new Dog("male", "Sharik", "Wow-Wow!");
+ const cat = new Cat("female", "Umka", "Meow!");
+ const man = new Human("male", "Valerii", "Bongiorno!");
+ const woman = new Human("female", "Liza", "Tere hommikust!");
 
-[man, dog, woman, cat, catWoman].forEach(elem => {
-   print(`Hi! I am ${elem.species}; My name is ${elem.name};
-     My gender is ${elem.gender}; I have ${elem.legs} legs;
-     I have ${elem.hands} hands; We are friends with ${elem['friends'].map(friend => friend.name).join(', ')} and I want to say ${elem.speach} to them`);
-});
+ // ======== OUTPUT ========
 
+ const persons = [man, woman, dog, cat];
 
-/* Print examples:
-   print('ABC');
-   print('<strong>ABC</strong>');
-   print('<strong>ABC</strong>', 'div');
-
-   print('human; John; male; 2; 2; Hello world!; Rex, Tom, Jenny');
-   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny');
-   print('human; <strong>John</strong>; male; 2; 2; <em>Hello world!</em>; Rex, Tom, Jenny', 'div');
-   */
+ persons.forEach((person) => print(person.saySpeach()));
