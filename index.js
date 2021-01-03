@@ -32,11 +32,18 @@ class Person {
 class Dog extends Person {
   constructor(name, gender, speech) {
     super("dog", name, gender, speech, 4);
+
+  }
+  say() {
+    return `${super.say()} Pets are friendly to all!`
   }
 }
 class Cat extends Person {
   constructor(name, gender, speech) {
     super("cat", name, gender, speech, 4);
+  }
+  say() {
+    return `${super.say()} Pets are friendly to all!`
   }
 }
 class Human extends Person {
@@ -46,12 +53,12 @@ class Human extends Person {
     this.friends = friends;
   }
   say() {
-    return `${super.say()} I have ${this.hands} hands.`
+    return `${super.say()} I have ${this.hands} hands. I am friendly with ${this.friends? this.friends.join(", ") : "nobody"}.`
   }
 }
 const dog = new Dog("Sharik", "male", "Wow-Wow!");
 const cat = new Cat("Umka", "female", "Meow!");
-const man = new Human("Valerii", "male", "Bongiorno!");
+const man = new Human("Valerii", "male", "Bongiorno!", ['cat', 'dog']);
 const woman = new Human("Liza", "female", "Tere hommikust!");
 
 // ======== OUTPUT ========
