@@ -29,23 +29,31 @@ class Person {
 
 }
 
-class Dog extends Person {
-  constructor(name, gender, speech) {
-    super("dog", name, gender, speech, 4);
+class Pet extends Person {
+  constructor(species, name, gender, speech) {
+    super(species, name, gender, speech, 4);
 
   }
   say() {
-    return `${super.say()} Pets are friendly to all!`
+    return `${super.say()} Pets are friendly to all!`;
   }
 }
-class Cat extends Person {
+
+
+class Dog extends Pet {
   constructor(name, gender, speech) {
-    super("cat", name, gender, speech, 4);
+    super("dog", name, gender, speech);
+
   }
-  say() {
-    return `${super.say()} Pets are friendly to all!`
+
+}
+class Cat extends Pet {
+  constructor(name, gender, speech) {
+    super("cat", name, gender, speech);
   }
 }
+
+
 class Human extends Person {
   constructor(name, gender, speech, friends) {
     super("human", name, gender, speech, 2); // '2' - here it's numb of legs
